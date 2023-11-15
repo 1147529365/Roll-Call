@@ -1,10 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        @font-face{
+            font-family: 'UNElektron';
+            src: url(./UUSUNElektron.ttf);
+        }
+        
+        body {
+            font-family: 'UNElektron', sans-serif;
+            src: url(../UUSUNElektron.ttf);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .main {
+            width: 40%;
+            min-width: 600px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #fff;
+            border-radius: 25px;
+            box-shadow: 0 0 15px #fff;
+            gap: 10px;
+            background-color: rgba(131, 128, 128, 0.272);
+        }
+        
+        .main>* {
+            font-size: 0.5em;
+            
+        }
+        #week div{
+            color: #6a6a6a;
+        }
+        #week div.highlight{
+            color: #fff;
+        }
+        .timeMain {
+            width: 60%;
+            text-align: center;
+        }
+        
+        #time {
+            font-size: 12em;
+            width: 250px;
+            text-align: center;
+            color: #fff;
+        }
+        #week {
+            width: 20%;
+        }
+        #dayDate{
+            font-size: 4em;
+            margin: 15px 0px;
+            text-align: center;
+            color: #fff;
+        }
+    </style>
 </head>
-<body>
 
+<body>
+    <div class="main">
+        <div id="week">
+            <div>Monday</div>
+            <div>Tuesday</div>
+            <div>Wednesday</div>
+            <div>Thursday</div>
+            <div>Friday</div>
+            <div>Saturday</div>
+            <div>Sunday</div>
+            
+        </div>
+        
+        <div class="timeMain">
+            <p id="time"></p>
+            <div id="dayDate">123</div>
+        </div>
+    </div>
+    <script>
+        var timer = document.getElementById("time");
+        var days = document.querySelectorAll('#week div');
+        function timeGet() {
+            var date = new Date;
+            var hours = addZero(date.getHours());
+            var minutes = addZero(date.getMinutes());
+            var seconds = addZero(date.getSeconds());
+            var week = date.getDay();
+            for (var i = 0; i < 7; i++) {
+                days[i].classList.remove("highlight");
+            }
+            if (week === 0) {
+                days[6].classList.add("highlight");
+            } else {
+                days[week - 1].classList.add("highlight");
+            }
+            timer.innerHTML = hours + ":" + minutes + ":" + seconds;
+            var DayDate = document.getElementById("dayDate");
+            var datee = date.getDate();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+            DayDate.innerHTML = year + "-"+ month + "-" + datee;
+        }
+        timeGet();
+        setInterval(timeGet, 1000);
+        function addZero(num) {
+            return num < "10" ? "0" + num : num;
+        }
+    </script>
 </body>
+
 </html>
